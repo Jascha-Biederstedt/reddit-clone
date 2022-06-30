@@ -1,6 +1,21 @@
 import Head from 'next/head';
 
-export default function Home() {
+import prisma from 'lib/prisma';
+import { getPosts } from 'lib/data';
+import Posts from 'components/Posts';
+
+export const getServerSideProps = async () => {
+  let posts = await getPosts(prisma);
+  posts = JSON.parse(JSON.stringify(posts));
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};
+
+export default function Home({ posts }) {
   return (
     <div>
       <Head>
@@ -9,7 +24,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <h1>Welcome!</h1>
+      <Posts posts={posts} />
     </div>
   );
 }
