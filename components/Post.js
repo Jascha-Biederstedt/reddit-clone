@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import timeago from 'lib/timeago';
 
@@ -7,9 +8,12 @@ const Post = ({ post }) => {
     <div className='flex flex-col mb-4 border border-3 border-black p-10 bg-gray-200 mx-20 my-10'>
       <div className='flex flex-shrink-0 pb-0 '>
         <div className='flex-shrink-0 block group '>
-          <div className='flex items-center text-gray-800'>
-            /r/{post.subredditName} Posted by {post.author.name} <br />
-            {timeago.format(new Date(post.createdAt))}
+          <div className='flex flex-col text-gray-800'>
+            <Link href={`/r/${post.subredditName}`}>
+              <a className='mr-2 underline'>/r/{post.subredditName}</a>
+            </Link>
+            <div>Posted by {post.author.name}</div>
+            <div>{timeago.format(new Date(post.createdAt))}</div>
           </div>
         </div>
       </div>
