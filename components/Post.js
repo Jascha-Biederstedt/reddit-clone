@@ -10,17 +10,19 @@ const Post = ({ post }) => {
         <div className='flex-shrink-0 block group '>
           <div className='flex flex-col text-gray-800'>
             <Link href={`/r/${post.subredditName}`}>
-              <a className='mr-2 underline'>/r/{post.subredditName}</a>
+              <a className='underline'>/r/{post.subredditName}</a>
             </Link>
             <div>Posted by {post.author.name}</div>
             <div>{timeago.format(new Date(post.createdAt))}</div>
           </div>
         </div>
       </div>
-      <div className='mt-5'>
-        <p className='flex-shrink text-2xl font-bold color-primary width-auto'>
-          {post.title}
-        </p>
+      <div className='mt-3'>
+        <Link href={`/r/${post.subredditName}/comments/${post.id}`}>
+          <a className='flex-shrink text-2xl font-bold color-primary width-auto'>
+            {post.title}
+          </a>
+        </Link>
         <p className='flex-shrink text-base font-normal color-primary width-auto mt-2'>
           {post.content}
         </p>
