@@ -6,6 +6,7 @@ import { getPost, getSubreddit } from 'lib/data.js';
 import timeago from 'lib/timeago';
 import NewComment from 'components/NewComment';
 import Spinner from 'components/Spinner';
+import Comments from 'components/Comments';
 
 export const getServerSideProps = async ({ params }) => {
   const subreddit = await getSubreddit(prisma, params.subreddit);
@@ -67,6 +68,7 @@ const Post = ({ subreddit, post }) => {
             to add a comment
           </p>
         )}
+        <Comments comments={post.comments} />
       </div>
     </>
   );
