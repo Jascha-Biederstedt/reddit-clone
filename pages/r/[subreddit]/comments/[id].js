@@ -1,8 +1,11 @@
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 import prisma from 'lib/prisma';
 import { getPost, getSubreddit } from 'lib/data.js';
 import timeago from 'lib/timeago';
+import NewComment from 'components/NewComment';
+import Spinner from 'components/Spinner';
 
 export const getServerSideProps = async ({ params }) => {
   const subreddit = await getSubreddit(prisma, params.subreddit);
@@ -18,6 +21,10 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 const Post = ({ subreddit, post }) => {
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') return <Spinner />;
+
   if (!post) return <p className='text-center p-5'>Post does not exist 😞</p>;
 
   return (
@@ -50,6 +57,16 @@ const Post = ({ subreddit, post }) => {
             {post.content}
           </p>
         </div>
+        {session ? (
+          <NewComment post={post} />
+        ) : (
+          <p className='mt-5'>
+            <a className='mr-1 underline' href='/api/auth/signin'>
+              Login
+            </a>
+            to add a comment
+          </p>
+        )}
       </div>
     </>
   );
