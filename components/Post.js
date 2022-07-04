@@ -23,6 +23,12 @@ const Post = ({ post }) => {
             {post.title}
           </a>
         </Link>
+        {post.image && (
+          <img
+            className='flex-shrink text-base font-normal color-primary width-auto mt-2'
+            src={post.image}
+          />
+        )}
         <p className='flex-shrink text-base font-normal color-primary width-auto mt-2'>
           {post.content}
         </p>
