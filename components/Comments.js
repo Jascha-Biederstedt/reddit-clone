@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import timeago from 'lib/timeago';
 import NewComment from 'components/NewComment';
@@ -9,7 +10,9 @@ const Comment = ({ comment, post }) => {
 
   return (
     <div className='mt-8'>
-      <p>{comment.author.name}</p>
+      <Link href={`/u/${comment.author.name}`}>
+        <a className='underline'>{comment.author.name}</a>
+      </Link>
       <p className='mb-2'>{timeago.format(new Date(comment.createdAt))}</p>
       <p>{comment.content}</p>
       {showReply ? (

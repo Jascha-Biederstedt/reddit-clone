@@ -95,7 +95,12 @@ const Post = ({ subreddit, post, votes, vote }) => {
           <div className='flex flex-shrink-0 pb-0 '>
             <div className='flex-shrink-0 block group '>
               <div className='flex flex-col text-gray-800'>
-                <div>Posted by {post.author.name} </div>
+                <div>
+                  Posted by
+                  <Link href={`/u/${post.author.name}`}>
+                    <a className='ml-1 underline'>{post.author.name}</a>
+                  </Link>
+                </div>
                 <div>{timeago.format(new Date(post.createdAt))}</div>
               </div>
             </div>

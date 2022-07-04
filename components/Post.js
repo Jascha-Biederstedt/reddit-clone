@@ -12,7 +12,12 @@ const Post = ({ post }) => {
             <Link href={`/r/${post.subredditName}`}>
               <a className='underline'>/r/{post.subredditName}</a>
             </Link>
-            <div>Posted by {post.author.name}</div>
+            <div>
+              Posted by
+              <Link href={`/u/${post.author.name}`}>
+                <a className='ml-1 underline'>{post.author.name}</a>
+              </Link>
+            </div>
             <div>{timeago.format(new Date(post.createdAt))}</div>
           </div>
         </div>
