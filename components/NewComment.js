@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-const NewComment = ({ post }) => {
+const NewComment = ({ post, comment }) => {
   const router = useRouter();
   const [content, setContent] = useState('');
 
@@ -21,6 +21,7 @@ const NewComment = ({ post }) => {
       body: JSON.stringify({
         post: post.id,
         content,
+        comment: comment?.id,
       }),
     });
 
